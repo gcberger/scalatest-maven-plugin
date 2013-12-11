@@ -116,6 +116,12 @@ abstract class AbstractScalaTestMojo extends AbstractMojo {
     boolean parallel;
 
     /**
+     * Set to true to run perform discovery of JUnit tests.
+     * @parameter expression="${doJUnitDiscovery}"
+     */
+    boolean doJUnitDiscovery;
+
+    /**
      * Comma separated list of packages containing suites to execute
      * @parameter expression="${membersOnlySuites}"
      */
@@ -398,6 +404,7 @@ abstract class AbstractScalaTestMojo extends AbstractMojo {
             addAll(tagsToInclude());
             addAll(tagsToExclude());
             addAll(parallel());
+            addAll(doJUnitDiscovery());
             addAll(tests());
             addAll(suites());
             addAll(suffixes());
@@ -435,6 +442,11 @@ abstract class AbstractScalaTestMojo extends AbstractMojo {
 
     private List<String> parallel() {
         return parallel ? singletonList("-c") : Collections.<String>emptyList();
+    }
+
+    private List<String> doJUnitDiscovery() {
+        return doJUnitDiscovery ? singletonList("-J") 
+                                : Collections.<String>emptyList();
     }
 
     //
