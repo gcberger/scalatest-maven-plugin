@@ -378,7 +378,6 @@ abstract class AbstractScalaTestMojo extends AbstractMojo {
     // Have to use the programmatic way of getting the classpath elements
     // instead of the field-level injection since that apparently doesn't work
     // for ReporterMojos in maven-2.2 (it does work in maven-3)
-gcbx-build-break
     private List<String> testClasspathElements() {
         try {
             return (List<String>) project.getTestClasspathElements();
