@@ -264,7 +264,13 @@ abstract class AbstractScalaTestMojo extends AbstractMojo {
 
         final Commandline cli = new Commandline();
         cli.setWorkingDirectory(project.getBasedir());
-        cli.setExecutable("java");
+
+        String jvmToUse =
+            System.getProperty( "java.home" ) +
+            File.separator + "bin" +
+            File.separator + "java";
+
+        cli.setExecutable(jvmToUse);
 
         // Set up environment
         if (environmentVariables != null) {
