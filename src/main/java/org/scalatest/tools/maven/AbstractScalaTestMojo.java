@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Properties;
 
 import static java.util.Collections.singletonList;
 
@@ -244,8 +245,14 @@ abstract class AbstractScalaTestMojo extends AbstractMojo {
     }
 
     // Returns true if all tests pass
+    //
+    // Added java.class.path property after user complained it only contained
+    // the maven plexus jar.
+    //
     private boolean runWithoutForking(String[] args) {
         try {
+            Properties props = System.getProperties();
+            props.setProperty("java.class.path", buildClassPathEnvironment());
             return (Boolean) run().invoke(null, new Object[]{args});
         } catch (IllegalAccessException e) {
             throw new IllegalStateException(e);
