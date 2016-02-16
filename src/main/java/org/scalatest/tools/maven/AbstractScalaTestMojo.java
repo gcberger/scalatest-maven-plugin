@@ -433,8 +433,8 @@ abstract class AbstractScalaTestMojo extends AbstractMojo {
 
     private List<String> runpath() {
         return compoundArg("-R",
-                outputDirectory.getAbsolutePath(),
                 testOutputDirectory.getAbsolutePath(),
+                outputDirectory.getAbsolutePath(),
                 runpath);
     }
 
